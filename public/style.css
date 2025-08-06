@@ -335,7 +335,7 @@ p {
 }
 
 .contact-info .contact-icons a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 10px;
