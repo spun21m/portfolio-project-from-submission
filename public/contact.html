@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Contact Sital Pun - frontend developer. Send a message, view social profiles, and connect for collaboration or job opportunities."
+    />
+    <meta name="author" content="Sital Pun" />
+    <meta name="robots" content="index, follow" />
+    <title>Contact Me | Sital Pun</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><a href="/" aria-label="Go to homepage">Sital Pun</a></h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html" aria-current="page">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <div class="contact-container">
+          <div class="contact-info">
+            <div class="slide-in">
+              <h2 class="big-title">Get in touch</h2>
+              <h3 class="subtitle">Currently Seeking new opportunities</h3>
+              <p class="description">
+                I’m actively seeking software engineering roles where I can
+                contribute to building robust, scalable, and user-centric
+                applications. With a strong foundation in front-end technologies
+                like HTML, CSS, JavaScript, and React, and a passion for clean,
+                maintainable code, I’m eager to join teams that value
+                collaboration, innovation, and impact. Whether you're looking to
+                collaborate on a project, offer freelance work, or fill a
+                developer role, feel free to reach out.
+              </p>
+            </div>
+            <h3>CONTACT</h3>
+            <div class="contact-icons">
+              <p>
+                <a
+                  href="mailto:shitalmagar21@gmail.com"
+                  target="_blank"
+                  aria-label="Email"
+                >
+                  <i class="fa-solid fa-envelope"></i>
+                  Email
+                </a>
+              </p>
+              <p>
+                <a
+                  href="https://www.linkedin.com/in/sital-pun-758843280/"
+                  target="_blank"
+                  aria-label="LinkedIn"
+                >
+                  <i class="fa-brands fa-linkedin"></i>
+                  LinkedIn
+                </a>
+              </p>
+              <p>
+                <a
+                  href="https://github.com/spun21m"
+                  target="_blank"
+                  aria-label="GitHub"
+                >
+                  <i class="fa-brands fa-github"></i>
+                  GitHub
+                </a>
+              </p>
+            </div>
+          </div>
+          <div class="contact-form">
+            <form id="contact-form">
+              <label for="first-name">First name *</label>
+              <input type="text" id="first-name" name="firstName" required />
+
+              <label for="last-name">Last name *</label>
+              <input type="text" id="last-name" name="lastName" required />
+
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required />
+
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" />
+
+              <label for="message" name="message">Leave me a message...</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+              ></textarea>
+              <div class="submit-container">
+                <button type="submit">Submit</button>
+              </div>
+              <div id="form-message" class="form-message" role="status"></div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <div class="footer-details">
+        <div class="footer-section contact-icons">
+          <i class="fa-solid fa-phone" aria-hidden="true"></i>
+          <span>929-305-9144</span>
+        </div>
+        <div class="footer-section contact-icons">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          <a
+            href="mailto:shitalmagar21@gmail.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Send email to shitalmagar21@gmail.com"
+          >
+            Shitalmagar21@gmail.com
+          </a>
+        </div>
+        <div class="footer-section contact-icons social-icons">
+          <a
+            href="https://linkedin.com/in/sital-pun-758843280/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+          >
+            <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+          </a>
+          <a
+            href="https://github.com/spun21m"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+          >
+            <i class="fab fa-github" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Sital Pun</p>
+          <p>All rights reserved</p>
+        </div>
+      </div>
+    </footer>
+    <script type="module">
+      const form = document.getElementById("contact-form");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const formData = {
+          firstName: document.getElementById("first-name").value,
+          lastName: document.getElementById("last-name").value,
+          email: document.getElementById("email").value,
+          subject: document.getElementById("subject").value,
+          message: document.getElementById("message").value,
+        };
+
+        try {
+          const res = await fetch("/submit-form", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+
+          const data = await res.json();
+          const messageDiv = document.getElementById("form-message");
+          messageDiv.textContent =
+            "💗 Thank you for your message! I will get back to you soon.💗";
+          messageDiv.classList.remove("error");
+          messageDiv.classList.add("success");
+          form.reset();
+
+          setTimeout(() => {
+            messageDiv.textContent = "";
+            messageDiv.classList.remove("success");
+          }, 5000);
+        } catch (err) {
+          const messageDiv = document.getElementById("form-message");
+          messageDiv.textContent =
+            "❌ Failed to send message. Please try again.";
+          messageDiv.classList.add("error");
+          messageDiv.classList.remove("success");
+          console.error(err);
+        }
+      });
+    </script>
+  </body>
+</html>
